@@ -1,0 +1,5 @@
+# dsh-token-visual bundle patch: one insert registering the dual-face plugin.
+# The row id must match the node half's exported cordis `name`.
+- insert:
+    - id: dsh-token-visual
+      name: 'dsh-token-visual'

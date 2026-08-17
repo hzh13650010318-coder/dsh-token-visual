@@ -5,7 +5,6 @@ window.__ModuleLoader__.load({
     var exports = module.exports;
     "use strict";
     var React = require("react");
-    var IconChevronDownOutline14 = require("@deepseek-ai/dsh-client-ui-primitives").IconChevronDownOutline14;
 
     var SOURCE_NAME = "dsh-token-visual";
     var STYLE_TAG = "dsh-token-visual/style.css";
@@ -17,7 +16,7 @@ window.__ModuleLoader__.load({
       var tag = document.createElement("style");
       tag.dataset.plugin = SOURCE_NAME;
       tag.dataset.pluginCss = STYLE_TAG;
-      tag.textContent = "\n.tq-plugin-card{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-3);border-radius:12px;list-style:none;transition:border-color .16s,background .16s}\n.tq-plugin-card:hover{border-color:var(--dsw-alias-label-dimmed)}\n.tq-plugin-card-open{background:var(--dsw-alias-bg-layer-2);border-color:var(--dsw-alias-label-dimmed)}\n.tq-plugin-card-header{appearance:none;width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;background:0 0;border:0;border-radius:12px;align-items:center;gap:12px;padding:14px 16px;display:flex}\n.tq-plugin-card-header:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}\n.tq-plugin-card-headtext{flex-direction:column;flex:1;gap:4px;min-width:0;display:flex}\n.tq-plugin-card-name{color:var(--dsw-alias-label-primary);font-size:15px;font-weight:600;line-height:1.4}\n.tq-plugin-card-desc{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:1.5}\n.tq-plugin-card-chevron{color:var(--dsw-alias-label-tertiary);flex:none;transition:transform .16s}\n.tq-plugin-card-chevron-open{transform:rotate(180deg)}\n.tq-plugin-card-body{border-top:1px solid var(--dsw-alias-border-l2);margin:0 16px;padding:14px 0 8px}\n.tq-capsule{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:22px;min-width:44px;padding:0 10px;border:1px solid var(--dsw-alias-border-l1);border-radius:999px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap;cursor:pointer;user-select:none;transition:border-color .15s ease,color .15s ease}\n.tq-capsule:hover{border-color:var(--dsw-alias-border-l2);color:var(--dsw-alias-label-primary)}\n.tq-capsule.tq-ok{border-color:var(--dsw-static-green-400);color:var(--dsw-static-green-400)}\n.tq-capsule.tq-ok:hover{border-color:var(--dsw-static-green-500);color:var(--dsw-static-green-500)}\n.tq-capsule.tq-low{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-capsule.tq-unsupported{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-page{box-sizing:border-box;width:100%;max-width:600px;display:flex;flex-direction:column;gap:16px;padding:4px 2px 24px;font-family:var(--dsw-font-family),system-ui,sans-serif;color:var(--dsw-alias-label-primary)}\n.tq-hero{box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-hero-low{border-color:var(--dsw-alias-state-error-primary)}\n.tq-hero-label{font-size:13px;color:var(--dsw-alias-label-secondary)}\n.tq-hero-value{font-size:34px;font-weight:600;line-height:1.15;letter-spacing:-.5px;font-variant-numeric:tabular-nums}\n.tq-hero-low .tq-hero-value{color:var(--dsw-alias-state-error-primary)}\n.tq-hero-unsupported{font-size:16px;font-weight:600;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-model{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-meta{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-warn{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-err{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-actions{display:flex;gap:8px;margin-top:8px}\n.tq-select{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;cursor:pointer;max-width:100%}\n.tq-section{box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:18px 20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-title{font-size:15px;font-weight:600}\n.tq-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}\n.tq-input{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;transition:border-color .15s ease}\n.tq-input:focus{border-color:var(--dsw-alias-brand-primary)}\n.tq-btn{box-sizing:border-box;height:34px;padding:0 16px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:transparent;color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;cursor:pointer;transition:background .15s ease,border-color .15s ease}\n.tq-btn:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-btn-primary{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-brand-primary);color:#fff}\n.tq-btn-primary:hover{background:var(--dsw-alias-brand-primary);filter:brightness(1.08)}\n.tq-hint{font-size:12px;color:var(--dsw-alias-label-tertiary);line-height:1.5}\n.tq-msg{font-size:12px;padding:6px 12px;border-radius:10px;white-space:nowrap}\n.tq-msg-ok{color:var(--dsw-alias-state-success-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-msg-err{color:var(--dsw-alias-state-error-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-curve{width:100%}\n.tq-curve svg{display:block}\n.tq-grid{stroke:var(--dsw-alias-border-l1);stroke-width:1}\n.tq-axis{fill:var(--dsw-alias-label-tertiary);font-size:10px}\n.tq-curve-area{fill:var(--dsw-alias-brand-primary);opacity:.12;stroke:none}\n.tq-curve-line{fill:none;stroke:var(--dsw-alias-brand-primary);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}\n.tq-curve-dot{fill:var(--dsw-alias-brand-primary)}\n.tq-cal{display:flex;flex-direction:column;gap:8px}\n.tq-cal-head{display:flex;align-items:center;justify-content:space-between}\n.tq-cal-title{font-size:14px;font-weight:500}\n.tq-cal-nav{box-sizing:border-box;width:28px;height:28px;border:1px solid var(--dsw-alias-border-l1);border-radius:8px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:15px;cursor:pointer;line-height:1}\n.tq-cal-nav:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-cal-week{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-weekday{height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--dsw-alias-label-tertiary)}\n.tq-cal-grid{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-cell{box-sizing:border-box;width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border-radius:50%;position:relative;cursor:default}\n.tq-cal-blank{visibility:hidden}\n.tq-cal-date{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;color:var(--dsw-alias-label-primary)}\n.tq-cal-empty .tq-cal-date{color:var(--dsw-alias-label-tertiary)}\n.tq-cal-today .tq-cal-date{box-shadow:inset 0 0 0 1px var(--dsw-alias-border-l2)}\n.tq-cal-cell:hover .tq-cal-date{background:var(--dsw-alias-brand-primary);color:#fff;box-shadow:none}\n.tq-cal-count{font-size:9px;line-height:10px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}\n.tq-cal-cell:hover .tq-cal-count{opacity:0}\n.tq-cal-cell::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--dsw-alias-bg-overlay);color:var(--dsw-alias-label-primary);border:1px solid var(--dsw-alias-border-l1);border-radius:8px;padding:4px 10px;font-size:11px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s ease;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.12)}\n.tq-cal-cell:hover::after{opacity:1}\n";
+      tag.textContent = "\n.tq-plugin-card{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-3);border-radius:12px;list-style:none;transition:border-color .16s,background .16s}\n.tq-plugin-card:hover{border-color:var(--dsw-alias-label-dimmed)}\n.tq-plugin-card-open{background:var(--dsw-alias-bg-layer-2);border-color:var(--dsw-alias-label-dimmed)}\n.tq-plugin-card-header{appearance:none;width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;background:0 0;border:0;border-radius:12px;align-items:center;gap:12px;padding:14px 16px;display:flex}\n.tq-plugin-card-header:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}\n.tq-plugin-card-headtext{flex-direction:column;flex:1;gap:4px;min-width:0;display:flex}\n.tq-plugin-card-name{color:var(--dsw-alias-label-primary);font-size:15px;font-weight:600;line-height:1.4}\n.tq-plugin-card-desc{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:1.5}\n.tq-plugin-card-chevron{color:var(--dsw-alias-label-tertiary);flex:none;transition:transform .16s}\n.tq-plugin-card-chevron-open{transform:rotate(180deg)}\n.tq-plugin-card-body{border-top:1px solid var(--dsw-alias-border-l2);margin:0 16px;padding:14px 0 8px}\n.tq-capsule{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:22px;min-width:44px;padding:0 10px;border:1px solid var(--dsw-alias-border-l1);border-radius:999px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap;cursor:pointer;user-select:none;transition:border-color .15s ease,color .15s ease}\n.tq-capsule:hover{border-color:var(--dsw-alias-border-l2);color:var(--dsw-alias-label-primary)}\n.tq-capsule.tq-ok{border-color:var(--dsw-static-green-400);color:var(--dsw-static-green-400)}\n.tq-capsule.tq-ok:hover{border-color:var(--dsw-static-green-500);color:var(--dsw-static-green-500)}\n.tq-capsule.tq-low{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-capsule.tq-unsupported{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-page{box-sizing:border-box;width:100%;max-width:600px;display:flex;flex-direction:column;gap:16px;padding:4px 2px 24px;font-family:var(--dsw-font-family),system-ui,sans-serif;color:var(--dsw-alias-label-primary)}\n.tq-hero{box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-hero-low{border-color:var(--dsw-alias-state-error-primary)}\n.tq-hero-label{font-size:13px;color:var(--dsw-alias-label-secondary)}\n.tq-hero-value{font-size:34px;font-weight:600;line-height:1.15;letter-spacing:-.5px;font-variant-numeric:tabular-nums}\n.tq-hero-low .tq-hero-value{color:var(--dsw-alias-state-error-primary)}\n.tq-hero-unsupported{font-size:16px;font-weight:600;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-model{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-meta{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-warn{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-err{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-actions{display:flex;gap:8px;margin-top:8px}\n.tq-select{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;cursor:pointer;max-width:100%}\n.tq-section{box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:18px 20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-title{font-size:15px;font-weight:600}\n.tq-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}\n.tq-input{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;transition:border-color .15s ease}\n.tq-input:focus{border-color:var(--dsw-alias-brand-primary)}\n.tq-btn{box-sizing:border-box;height:34px;padding:0 16px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:transparent;color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;cursor:pointer;transition:background .15s ease,border-color .15s ease}\n.tq-btn:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-btn-primary{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-brand-primary);color:#fff}\n.tq-btn-primary:hover{background:var(--dsw-alias-brand-primary);filter:brightness(1.08)}\nbody[data-ds-dark-theme] .tq-btn-primary{border-color:var(--dsw-alias-button-info-fill);background:var(--dsw-alias-button-info-fill)}\nbody[data-ds-dark-theme] .tq-btn-primary:hover{background:var(--dsw-alias-button-info-hover);filter:none}\n.tq-hint{font-size:12px;color:var(--dsw-alias-label-tertiary);line-height:1.5}\n.tq-msg{font-size:12px;padding:6px 12px;border-radius:10px;white-space:nowrap}\n.tq-msg-ok{color:var(--dsw-alias-state-success-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-msg-err{color:var(--dsw-alias-state-error-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-curve{width:100%}\n.tq-curve svg{display:block}\n.tq-grid{stroke:var(--dsw-alias-border-l1);stroke-width:1}\n.tq-axis{fill:var(--dsw-alias-label-tertiary);font-size:10px}\n.tq-curve-area{fill:var(--dsw-alias-brand-primary);opacity:.12;stroke:none}\n.tq-curve-line{fill:none;stroke:var(--dsw-alias-brand-primary);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}\n.tq-curve-dot{fill:var(--dsw-alias-brand-primary);stroke:#fff;stroke-width:1}\n.tq-curve-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:8px}\n.tq-curve-legend-item{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--dsw-alias-label-secondary);white-space:nowrap}\n.tq-curve-legend-dot{width:8px;height:8px;border-radius:2px;flex:none}\n.tq-curve-title{font-size:12px;color:var(--dsw-alias-label-tertiary);margin:10px 0 2px}\n.tq-bar{fill:var(--dsw-alias-button-info-fill);opacity:.5}\n.tq-bar:hover{fill:var(--dsw-alias-button-info-hover);opacity:.9}\n.tq-curve-total-line{fill:none;stroke:#F2A33C;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:1}.tq-curve-halo{fill:none;stroke:rgba(255,255,255,.75);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}\n.tq-cal{display:flex;flex-direction:column;gap:8px}\n.tq-cal-head{display:flex;align-items:center;justify-content:space-between}\n.tq-cal-title{font-size:14px;font-weight:500}\n.tq-cal-nav{box-sizing:border-box;width:28px;height:28px;border:1px solid var(--dsw-alias-border-l1);border-radius:8px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:15px;cursor:pointer;line-height:1}\n.tq-cal-nav:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-cal-week{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-weekday{height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--dsw-alias-label-tertiary)}\n.tq-cal-grid{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-cell{box-sizing:border-box;width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border-radius:50%;position:relative;cursor:default}\n.tq-cal-blank{visibility:hidden}\n.tq-cal-date{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;color:var(--dsw-alias-label-primary)}\n.tq-cal-empty .tq-cal-date{color:var(--dsw-alias-label-tertiary)}\n.tq-cal-today .tq-cal-date{box-shadow:inset 0 0 0 1.5px var(--dsw-alias-brand-primary);color:var(--dsw-alias-brand-primary);background:color-mix(in srgb,var(--dsw-alias-brand-primary) 12%,transparent)}\n.tq-cal-cell:hover .tq-cal-date{background:var(--dsw-alias-brand-primary);color:#fff;box-shadow:none}\nbody[data-ds-dark-theme] .tq-cal-cell:hover .tq-cal-date{background:var(--dsw-alias-button-info-fill)}\n.tq-cal-count{font-size:9px;line-height:10px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}\n.tq-cal-cell:hover .tq-cal-count{opacity:0}\n.tq-cal-cell::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--dsw-alias-bg-overlay);color:var(--dsw-alias-label-primary);border:1px solid var(--dsw-alias-border-l1);border-radius:8px;padding:4px 10px;font-size:11px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s ease;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.12)}\n.tq-cal-cell:hover::after{opacity:1}\n.tq-curve-tip{position:fixed;background:var(--dsw-alias-bg-overlay);color:var(--dsw-alias-label-primary);border:1px solid var(--dsw-alias-border-l1);border-radius:8px;padding:6px 10px;font-size:12px;line-height:1.6;white-space:pre-line;box-shadow:0 4px 16px rgba(0,0,0,.12);pointer-events:none;z-index:999;max-width:280px}\n";
       document.head.appendChild(tag);
     }
 
@@ -118,7 +117,7 @@ window.__ModuleLoader__.load({
       let label = "—";
       let style = undefined;
       if (failed) { label = "!"; }
-      else if (unsupported) { label = "不支持"; cls += " tq-capsule-unsupported"; style = { borderColor: RED, color: RED }; }
+      else if (unsupported) { label = "不支持"; cls += " tq-capsule-unsupported"; }
       else if (total !== null && total !== undefined) {
         label = fmtBalance(total);
         if (low) { cls += " tq-capsule-low"; style = { borderColor: RED, color: RED }; }
@@ -161,24 +160,82 @@ window.__ModuleLoader__.load({
 
     function ConsumptionCurve(props) {
       const daily = props.daily || {};
+      const dailyModels = props.dailyModels || {};
+      const providers = props.providers || [];
       const days = [];
       const today = new Date();
       for (let i = 29; i >= 0; i--) {
         const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
-        days.push({ key: keyOf(d), label: (d.getMonth() + 1) + "/" + d.getDate(), tokens: daily[keyOf(d)] || 0 });
+        days.push({ key: keyOf(d), label: (d.getMonth() + 1) + "/" + d.getDate() });
       }
-      const cap = Math.max(1, days.reduce((m, x) => Math.max(m, x.tokens), 0));
-      const W = 640, H = 190, L = 48, R = 14, T = 12, B = 26;
+      // Distinct model keys seen in the 30-day window (stable, sorted).
+      const modelKeys = [];
+      const seen = new Set();
+      for (const d of days) {
+        const bucket = dailyModels[d.key];
+        if (!bucket) continue;
+        for (const mk of Object.keys(bucket).sort()) {
+          if (!seen.has(mk)) { seen.add(mk); modelKeys.push(mk); }
+        }
+      }
+      const PALETTE = ["#7C6CE0", "#4ED17E", "#F2A33C", "#E05A5A", "#9B6FE8", "#2BA9C4", "#E85D9A", "#A3C94F", "#5AC8E8", "#8A8F98"];
+      const colorOf = (i) => PALETTE[i % PALETTE.length];
+      const labelOf = (mk) => {
+        const sep = mk.indexOf("::");
+        const pid = sep === -1 ? mk : mk.slice(0, sep);
+        const mid = sep === -1 ? mk : mk.slice(sep + 2);
+        const p = providers.find((x) => x.provider === pid);
+        if (!p) return mid || mk;
+        const m = p.models.find((x) => x.id === mid);
+        return p.name + " · " + (m ? (m.name || m.id) : mid);
+      };
+      const modelValues = modelKeys.map((mk) => days.map((d) => (dailyModels[d.key] && dailyModels[d.key][mk]) || 0));
+      const totalValues = days.map((d) => daily[d.key] || 0);
+      // Shared y-axis cap: total usage is the sum across models, so it always
+      // dominates any single-model line.
+      const cap = Math.max(1, totalValues.reduce((m, v) => Math.max(m, v), 0));
+
+      const W = 640, L = 48, R = 14, T = 12, B = 22;
+      const H = 190;
       const iw = W - L - R, ih = H - T - B;
       const x = (i) => L + (iw * i) / (days.length - 1);
       const y = (v) => T + ih - (ih * v) / cap;
-      const linePts = days.map((d, i) => (i === 0 ? "M" : "L") + x(i).toFixed(1) + " " + y(d.tokens).toFixed(1)).join(" ");
-      const areaPts = linePts + " L" + x(days.length - 1).toFixed(1) + " " + (T + ih) + " L" + x(0).toFixed(1) + " " + (T + ih) + " Z";
       const ticks = [0, 0.25, 0.5, 0.75, 1].map((f) => ({ v: cap * f, yy: y(cap * f) }));
+      const barW = Math.max(2, (iw / days.length) * 0.7);
+      const totalPts = totalValues.map((v, i) => (i === 0 ? "M" : "L") + x(i).toFixed(1) + " " + y(v).toFixed(1)).join(" ");
+      // Hover tooltip: shows the day's total and per-model breakdown.
+      const [tip, setTip] = React.useState(null);
+      let tipEl = null;
+      if (tip) {
+        const bucket = (dailyModels && dailyModels[tip.d.key]) || {};
+        const modelRows = modelKeys
+          .filter((mk) => (bucket[mk] || 0) > 0)
+          .map((mk) => labelOf(mk) + "：" + fmtNumber(bucket[mk] || 0) + " tokens");
+        const lines = [tip.d.label, "总消耗 " + fmtNumber(totalValues[tip.i]) + " tokens"].concat(modelRows);
+        const tipW = 260;
+        const left = tip.x + 14 > window.innerWidth - tipW - 8 ? tip.x - tipW - 14 : tip.x + 14;
+        const top = tip.y + 18 > window.innerHeight - 180 ? tip.y - 150 : tip.y + 18;
+        tipEl = React.createElement("div", {
+          className: "tq-curve-tip",
+          style: { left, top },
+        }, lines.join("\n"));
+      }
 
       return React.createElement(
         "div",
         { className: "tq-curve" },
+        React.createElement("div", { className: "tq-curve-legend" },
+          React.createElement("span", { className: "tq-curve-legend-item" },
+            React.createElement("span", { className: "tq-curve-legend-dot", style: { background: "#F2A33C" } }),
+            "全部模型总消耗"
+          ),
+          modelKeys.map((mk, i) =>
+            React.createElement("span", { key: mk, className: "tq-curve-legend-item" },
+              React.createElement("span", { className: "tq-curve-legend-dot", style: { background: colorOf(i) } }),
+              labelOf(mk)
+            )
+          )
+        ),
         React.createElement(
           "svg",
           { viewBox: "0 0 " + W + " " + H, width: "100%" },
@@ -188,60 +245,46 @@ window.__ModuleLoader__.load({
               React.createElement("text", { x: L - 6, y: t.yy + 4, className: "tq-axis", textAnchor: "end" }, fmtCompact(Math.round(t.v)))
             )
           ),
+          // Solid bars: total usage across all models, send-button color, behind the lines.
+          days.map((d, i) => {
+            const v = totalValues[i];
+            if (v <= 0) return null;
+            const h = Math.max(1, (ih * v) / cap);
+            return React.createElement("rect", {
+              key: "bar" + d.key,
+              x: x(i) - barW / 2,
+              y: y(v),
+              width: barW,
+              height: h,
+              className: "tq-bar",
+              onMouseEnter: (e) => setTip({ d, i, x: e.clientX, y: e.clientY }),
+              onMouseMove: (e) => setTip({ d, i, x: e.clientX, y: e.clientY }),
+              onMouseLeave: () => setTip(null),
+            });
+          }),
           days.map((d, i) =>
             i % 5 === 0 || i === days.length - 1
-              ? React.createElement("text", { key: "x" + d.key, x: x(i), y: H - 8, className: "tq-axis", textAnchor: "middle" }, d.label)
+              ? React.createElement("text", { key: "x" + d.key, x: x(i), y: H - 6, className: "tq-axis", textAnchor: "middle" }, d.label)
               : null
           ),
-          React.createElement("path", { d: areaPts, className: "tq-curve-area" }),
-          React.createElement("path", { d: linePts, className: "tq-curve-line" }),
-          days.map((d, i) =>
-            d.tokens > 0
-              ? React.createElement("circle", { key: "d" + d.key, cx: x(i), cy: y(d.tokens), r: 2.5, className: "tq-curve-dot" })
-              : null
-          )
-        )
-      );
-    }
-
-    const WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"];
-
-    function ConsumptionCalendar(props) {
-      const daily = props.daily || {};
-      const [offset, setOffset] = React.useState(0);
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = now.getMonth() + offset;
-      const first = new Date(year, month, 1);
-      const lead = (first.getDay() + 6) % 7;
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const todayKey = keyOf(now);
-      const cells = [];
-      for (let i = 0; i < lead; i++) cells.push(null);
-      for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
-
-      return React.createElement("div", { className: "tq-cal" },
-        React.createElement("div", { className: "tq-cal-head" },
-          React.createElement("button", { type: "button", className: "tq-cal-nav", onClick: () => setOffset(offset - 1) }, "‹"),
-          React.createElement("div", { className: "tq-cal-title" }, year + "年" + (month + 1) + "月"),
-          React.createElement("button", { type: "button", className: "tq-cal-nav", onClick: () => setOffset(offset + 1) }, "›")
+          modelKeys.length > 0
+            ? modelKeys.map((mk, mi) => {
+                const vals = modelValues[mi];
+                const pts = vals.map((v, i) => (i === 0 ? "M" : "L") + x(i).toFixed(1) + " " + y(v).toFixed(1)).join(" ");
+                const col = colorOf(mi);
+                return React.createElement("g", { key: mk },
+                  React.createElement("path", { d: pts, className: "tq-curve-halo" }),
+                  React.createElement("path", { d: pts, className: "tq-curve-line", style: { stroke: col } }),
+                  vals.map((v, i) => v > 0 ? React.createElement("circle", { key: "p" + i, cx: x(i), cy: y(v), r: 2.2, className: "tq-curve-dot", style: { fill: col } }) : null)
+                );
+              })
+            : React.createElement(React.Fragment, null,
+                React.createElement("path", { d: totalPts, className: "tq-curve-halo" }),
+                React.createElement("path", { d: totalPts, className: "tq-curve-total-line" }),
+                totalValues.map((v, i) => v > 0 ? React.createElement("circle", { key: "tp" + i, cx: x(i), cy: y(v), r: 2.4, className: "tq-curve-dot", style: { fill: "#F2A33C" } }) : null)
+              )
         ),
-        React.createElement("div", { className: "tq-cal-week" },
-          WEEKDAYS.map((w) => React.createElement("div", { key: w, className: "tq-cal-weekday" }, w))
-        ),
-        React.createElement("div", { className: "tq-cal-grid" },
-          cells.map((d, i) => {
-            if (!d) return React.createElement("div", { key: "x" + i, className: "tq-cal-cell tq-cal-blank" });
-            const k = keyOf(d);
-            const tokens = daily[k] || 0;
-            const tip = (d.getMonth() + 1) + "月" + d.getDate() + "日" + (tokens > 0 ? " 消耗 " + fmtNumber(tokens) + " tokens" : " 无消耗记录");
-            let cls = "tq-cal-cell" + (tokens === 0 ? " tq-cal-empty" : "") + (k === todayKey ? " tq-cal-today" : "");
-            return React.createElement("div", { key: k, className: cls, "data-tip": tip },
-              React.createElement("span", { className: "tq-cal-date" }, String(d.getDate())),
-              React.createElement("span", { className: "tq-cal-count" }, tokens > 0 ? fmtCompact(tokens) : "")
-            );
-          })
-        )
+        tipEl
       );
     }
 
@@ -317,6 +360,7 @@ window.__ModuleLoader__.load({
       const low = !unsupported && total !== null && total !== undefined && view && typeof view.threshold === "number" && total < view.threshold;
       const symbol = curSymbol(bal ? bal.currency : "CNY");
       const daily = view ? (view.daily || {}) : {};
+      const dailyModels = view ? (view.dailyModels || {}) : {};
       const todayTokens = daily[keyOf(new Date())] || 0;
       const selKey = sel ? sel.provider + "::" + sel.model : "";
       const providers = (view && view.providers) || [];
@@ -380,12 +424,7 @@ window.__ModuleLoader__.load({
         ),
         React.createElement("div", { className: "tq-section" },
           React.createElement("div", { className: "tq-title" }, "Token 每日消耗（近 30 天）"),
-          React.createElement(ConsumptionCurve, { daily: daily })
-        ),
-        React.createElement("div", { className: "tq-section" },
-          React.createElement("div", { className: "tq-title" }, "消耗日历"),
-          React.createElement(ConsumptionCalendar, { daily: daily }),
-          React.createElement("div", { className: "tq-hint" }, "将鼠标指向日期即可查看当日消耗（日期高亮为圆形）。")
+          React.createElement(ConsumptionCurve, { daily: daily, dailyModels: dailyModels, providers: providers })
         )
       );
     }
@@ -405,7 +444,22 @@ window.__ModuleLoader__.load({
             React.createElement("span", { className: "tq-plugin-card-name" }, "Token余额"),
             React.createElement("span", { className: "tq-plugin-card-desc" }, "Token 余额、额度与消耗统计配置")
           ),
-          React.createElement(IconChevronDownOutline14, { className: "tq-plugin-card-chevron" + (open ? " tq-plugin-card-chevron-open" : "") })
+          React.createElement("svg", {
+            viewBox: "0 0 16 16",
+            width: 14,
+            height: 14,
+            "aria-hidden": true,
+            className: "tq-plugin-card-chevron" + (open ? " tq-plugin-card-chevron-open" : ""),
+          },
+            React.createElement("path", {
+              d: "M4 6l4 4 4-4",
+              fill: "none",
+              stroke: "currentColor",
+              strokeWidth: 1.5,
+              strokeLinecap: "round",
+              strokeLinejoin: "round",
+            })
+          )
         ),
         open ? React.createElement("div", { className: "tq-plugin-card-body" },
           React.createElement(TokenQuotaPage, null)

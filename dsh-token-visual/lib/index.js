@@ -103,6 +103,7 @@ export function apply(ctx) {
   const state = {
     threshold: 10,
     daily: {},
+    dailyModels: {},
     balances: {},
     cookies: {},
   };
@@ -133,7 +134,15 @@ export function apply(ctx) {
     const keys = Object.keys(state.daily).sort();
     if (keys.length > 400) {
       const keep = new Set(keys.slice(keys.length - 400));
-      for (const k of keys) if (!keep.has(k)) delete state.daily[k];
+      for (const k of keys) if (!keep.has(k)) {
+        delete state.daily[k];
+        delete state.dailyModels[k];
+      }
+    }
+    const mkeys = Object.keys(state.dailyModels).sort();
+    if (mkeys.length > 400) {
+      const mkeep = new Set(mkeys.slice(mkeys.length - 400));
+      for (const k of mkeys) if (!mkeep.has(k)) delete state.dailyModels[k];
     }
   }
 
@@ -184,6 +193,24 @@ export function apply(ctx) {
             }
           }
           trimDaily();
+        }
+        if (parsed.dailyModels && typeof parsed.dailyModels === 'object') {
+          state.dailyModels = {};
+          for (const k of Object.keys(parsed.dailyModels)) {
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(k)) continue;
+            const byModel = parsed.dailyModels[k];
+            if (!byModel || typeof byModel !== 'object') continue;
+            const clean = {};
+            for (const mk of Object.keys(byModel)) {
+              if (typeof byModel[mk] === 'number' && byModel[mk] > 0) clean[mk] = byModel[mk];
+            }
+            if (Object.keys(clean).length > 0) state.dailyModels[k] = clean;
+          }
+          const mkeys = Object.keys(state.dailyModels).sort();
+          if (mkeys.length > 400) {
+            const mkeep = new Set(mkeys.slice(mkeys.length - 400));
+            for (const k of mkeys) if (!mkeep.has(k)) delete state.dailyModels[k];
+          }
         }
       }
     } catch (e) {
@@ -735,6 +762,7 @@ export function apply(ctx) {
       } : null,
       threshold: state.threshold,
       daily: state.daily,
+      dailyModels: state.dailyModels,
       providers,
       rechargeUrl: rechargeUrlFor(provider || ''),
       needsCookie,
@@ -855,6 +883,12 @@ export function apply(ctx) {
             if (total > 0) {
               const key = dayKey(new Date());
               state.daily[key] = (state.daily[key] || 0) + total;
+              // Per-model bucket: options carries the routed provider/model pair.
+              const provider = options && typeof options.provider === 'string' && options.provider ? options.provider : 'unknown';
+              const model = options && (typeof options.model === 'string' || typeof options.model === 'number') ? String(options.model) : 'unknown';
+              const modelKey = provider + '::' + model;
+              if (!state.dailyModels[key]) state.dailyModels[key] = {};
+              state.dailyModels[key][modelKey] = (state.dailyModels[key][modelKey] || 0) + total;
               trimDaily();
               schedulePersist();
             }

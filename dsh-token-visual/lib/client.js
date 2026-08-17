@@ -5,6 +5,7 @@ window.__ModuleLoader__.load({
     var exports = module.exports;
     "use strict";
     var React = require("react");
+    var IconChevronDownOutline14 = require("@deepseek-ai/dsh-client-ui-primitives").IconChevronDownOutline14;
 
     var SOURCE_NAME = "dsh-token-visual";
     var STYLE_TAG = "dsh-token-visual/style.css";
@@ -16,7 +17,7 @@ window.__ModuleLoader__.load({
       var tag = document.createElement("style");
       tag.dataset.plugin = SOURCE_NAME;
       tag.dataset.pluginCss = STYLE_TAG;
-      tag.textContent = "\n.tq-capsule{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:22px;min-width:44px;padding:0 10px;border:1px solid var(--dsw-alias-border-l1);border-radius:999px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap;cursor:pointer;user-select:none;transition:border-color .15s ease,color .15s ease}\n.tq-capsule:hover{border-color:var(--dsw-alias-border-l2);color:var(--dsw-alias-label-primary)}\n.tq-capsule.tq-ok{border-color:var(--dsw-static-green-400);color:var(--dsw-static-green-400)}\n.tq-capsule.tq-ok:hover{border-color:var(--dsw-static-green-500);color:var(--dsw-static-green-500)}\n.tq-capsule.tq-low{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-capsule.tq-unsupported{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-page{box-sizing:border-box;width:100%;max-width:600px;display:flex;flex-direction:column;gap:16px;padding:4px 2px 24px;font-family:var(--dsw-font-family),system-ui,sans-serif;color:var(--dsw-alias-label-primary)}\n.tq-hero{box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-hero-low{border-color:var(--dsw-alias-state-error-primary)}\n.tq-hero-label{font-size:13px;color:var(--dsw-alias-label-secondary)}\n.tq-hero-value{font-size:34px;font-weight:600;line-height:1.15;letter-spacing:-.5px;font-variant-numeric:tabular-nums}\n.tq-hero-low .tq-hero-value{color:var(--dsw-alias-state-error-primary)}\n.tq-hero-unsupported{font-size:16px;font-weight:600;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-model{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-meta{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-warn{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-err{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-actions{display:flex;gap:8px;margin-top:8px}\n.tq-select{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;cursor:pointer;max-width:100%}\n.tq-section{box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:18px 20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-title{font-size:15px;font-weight:600}\n.tq-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}\n.tq-input{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;transition:border-color .15s ease}\n.tq-input:focus{border-color:var(--dsw-alias-brand-primary)}\n.tq-btn{box-sizing:border-box;height:34px;padding:0 16px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:transparent;color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;cursor:pointer;transition:background .15s ease,border-color .15s ease}\n.tq-btn:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-btn-primary{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-brand-primary);color:#fff}\n.tq-btn-primary:hover{background:var(--dsw-alias-brand-primary);filter:brightness(1.08)}\n.tq-hint{font-size:12px;color:var(--dsw-alias-label-tertiary);line-height:1.5}\n.tq-msg{font-size:12px;padding:6px 12px;border-radius:10px;white-space:nowrap}\n.tq-msg-ok{color:var(--dsw-alias-state-success-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-msg-err{color:var(--dsw-alias-state-error-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-curve{width:100%}\n.tq-curve svg{display:block}\n.tq-grid{stroke:var(--dsw-alias-border-l1);stroke-width:1}\n.tq-axis{fill:var(--dsw-alias-label-tertiary);font-size:10px}\n.tq-curve-area{fill:var(--dsw-alias-brand-primary);opacity:.12;stroke:none}\n.tq-curve-line{fill:none;stroke:var(--dsw-alias-brand-primary);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}\n.tq-curve-dot{fill:var(--dsw-alias-brand-primary)}\n.tq-cal{display:flex;flex-direction:column;gap:8px}\n.tq-cal-head{display:flex;align-items:center;justify-content:space-between}\n.tq-cal-title{font-size:14px;font-weight:500}\n.tq-cal-nav{box-sizing:border-box;width:28px;height:28px;border:1px solid var(--dsw-alias-border-l1);border-radius:8px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:15px;cursor:pointer;line-height:1}\n.tq-cal-nav:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-cal-week{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-weekday{height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--dsw-alias-label-tertiary)}\n.tq-cal-grid{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-cell{box-sizing:border-box;width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border-radius:50%;position:relative;cursor:default}\n.tq-cal-blank{visibility:hidden}\n.tq-cal-date{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;color:var(--dsw-alias-label-primary)}\n.tq-cal-empty .tq-cal-date{color:var(--dsw-alias-label-tertiary)}\n.tq-cal-today .tq-cal-date{box-shadow:inset 0 0 0 1px var(--dsw-alias-border-l2)}\n.tq-cal-cell:hover .tq-cal-date{background:var(--dsw-alias-brand-primary);color:#fff;box-shadow:none}\n.tq-cal-count{font-size:9px;line-height:10px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}\n.tq-cal-cell:hover .tq-cal-count{opacity:0}\n.tq-cal-cell::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--dsw-alias-bg-overlay);color:var(--dsw-alias-label-primary);border:1px solid var(--dsw-alias-border-l1);border-radius:8px;padding:4px 10px;font-size:11px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s ease;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.12)}\n.tq-cal-cell:hover::after{opacity:1}\n";
+      tag.textContent = "\n.tq-plugin-card{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-3);border-radius:12px;list-style:none;transition:border-color .16s,background .16s}\n.tq-plugin-card:hover{border-color:var(--dsw-alias-label-dimmed)}\n.tq-plugin-card-open{background:var(--dsw-alias-bg-layer-2);border-color:var(--dsw-alias-label-dimmed)}\n.tq-plugin-card-header{appearance:none;width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;background:0 0;border:0;border-radius:12px;align-items:center;gap:12px;padding:14px 16px;display:flex}\n.tq-plugin-card-header:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}\n.tq-plugin-card-headtext{flex-direction:column;flex:1;gap:4px;min-width:0;display:flex}\n.tq-plugin-card-name{color:var(--dsw-alias-label-primary);font-size:15px;font-weight:600;line-height:1.4}\n.tq-plugin-card-desc{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:1.5}\n.tq-plugin-card-chevron{color:var(--dsw-alias-label-tertiary);flex:none;transition:transform .16s}\n.tq-plugin-card-chevron-open{transform:rotate(180deg)}\n.tq-plugin-card-body{border-top:1px solid var(--dsw-alias-border-l2);margin:0 16px;padding:14px 0 8px}\n.tq-capsule{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:22px;min-width:44px;padding:0 10px;border:1px solid var(--dsw-alias-border-l1);border-radius:999px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap;cursor:pointer;user-select:none;transition:border-color .15s ease,color .15s ease}\n.tq-capsule:hover{border-color:var(--dsw-alias-border-l2);color:var(--dsw-alias-label-primary)}\n.tq-capsule.tq-ok{border-color:var(--dsw-static-green-400);color:var(--dsw-static-green-400)}\n.tq-capsule.tq-ok:hover{border-color:var(--dsw-static-green-500);color:var(--dsw-static-green-500)}\n.tq-capsule.tq-low{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-capsule.tq-unsupported{border-color:var(--dsw-alias-state-error-primary);color:var(--dsw-alias-state-error-primary)}\n.tq-page{box-sizing:border-box;width:100%;max-width:600px;display:flex;flex-direction:column;gap:16px;padding:4px 2px 24px;font-family:var(--dsw-font-family),system-ui,sans-serif;color:var(--dsw-alias-label-primary)}\n.tq-hero{box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-hero-low{border-color:var(--dsw-alias-state-error-primary)}\n.tq-hero-label{font-size:13px;color:var(--dsw-alias-label-secondary)}\n.tq-hero-value{font-size:34px;font-weight:600;line-height:1.15;letter-spacing:-.5px;font-variant-numeric:tabular-nums}\n.tq-hero-low .tq-hero-value{color:var(--dsw-alias-state-error-primary)}\n.tq-hero-unsupported{font-size:16px;font-weight:600;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-model{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-meta{font-size:12px;color:var(--dsw-alias-label-tertiary)}\n.tq-hero-warn{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-err{font-size:12px;color:var(--dsw-alias-state-error-primary)}\n.tq-hero-actions{display:flex;gap:8px;margin-top:8px}\n.tq-select{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;cursor:pointer;max-width:100%}\n.tq-section{box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:18px 20px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:16px}\n.tq-title{font-size:15px;font-weight:600}\n.tq-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}\n.tq-input{box-sizing:border-box;height:34px;padding:0 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;outline:none;transition:border-color .15s ease}\n.tq-input:focus{border-color:var(--dsw-alias-brand-primary)}\n.tq-btn{box-sizing:border-box;height:34px;padding:0 16px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;background:transparent;color:var(--dsw-alias-label-primary);font-family:inherit;font-size:13px;cursor:pointer;transition:background .15s ease,border-color .15s ease}\n.tq-btn:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-btn-primary{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-brand-primary);color:#fff}\n.tq-btn-primary:hover{background:var(--dsw-alias-brand-primary);filter:brightness(1.08)}\n.tq-hint{font-size:12px;color:var(--dsw-alias-label-tertiary);line-height:1.5}\n.tq-msg{font-size:12px;padding:6px 12px;border-radius:10px;white-space:nowrap}\n.tq-msg-ok{color:var(--dsw-alias-state-success-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-msg-err{color:var(--dsw-alias-state-error-primary);background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}\n.tq-curve{width:100%}\n.tq-curve svg{display:block}\n.tq-grid{stroke:var(--dsw-alias-border-l1);stroke-width:1}\n.tq-axis{fill:var(--dsw-alias-label-tertiary);font-size:10px}\n.tq-curve-area{fill:var(--dsw-alias-brand-primary);opacity:.12;stroke:none}\n.tq-curve-line{fill:none;stroke:var(--dsw-alias-brand-primary);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}\n.tq-curve-dot{fill:var(--dsw-alias-brand-primary)}\n.tq-cal{display:flex;flex-direction:column;gap:8px}\n.tq-cal-head{display:flex;align-items:center;justify-content:space-between}\n.tq-cal-title{font-size:14px;font-weight:500}\n.tq-cal-nav{box-sizing:border-box;width:28px;height:28px;border:1px solid var(--dsw-alias-border-l1);border-radius:8px;background:transparent;color:var(--dsw-alias-label-secondary);font-size:15px;cursor:pointer;line-height:1}\n.tq-cal-nav:hover{background:var(--dsw-alias-interactive-bg-hover)}\n.tq-cal-week{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-weekday{height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--dsw-alias-label-tertiary)}\n.tq-cal-grid{display:grid;grid-template-columns:repeat(7,44px);gap:2px;justify-content:center}\n.tq-cal-cell{box-sizing:border-box;width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border-radius:50%;position:relative;cursor:default}\n.tq-cal-blank{visibility:hidden}\n.tq-cal-date{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;color:var(--dsw-alias-label-primary)}\n.tq-cal-empty .tq-cal-date{color:var(--dsw-alias-label-tertiary)}\n.tq-cal-today .tq-cal-date{box-shadow:inset 0 0 0 1px var(--dsw-alias-border-l2)}\n.tq-cal-cell:hover .tq-cal-date{background:var(--dsw-alias-brand-primary);color:#fff;box-shadow:none}\n.tq-cal-count{font-size:9px;line-height:10px;color:var(--dsw-alias-label-tertiary);white-space:nowrap}\n.tq-cal-cell:hover .tq-cal-count{opacity:0}\n.tq-cal-cell::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--dsw-alias-bg-overlay);color:var(--dsw-alias-label-primary);border:1px solid var(--dsw-alias-border-l1);border-radius:8px;padding:4px 10px;font-size:11px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s ease;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.12)}\n.tq-cal-cell:hover::after{opacity:1}\n";
       document.head.appendChild(tag);
     }
 
@@ -133,7 +134,9 @@ window.__ModuleLoader__.load({
         }
         const sym = curSymbol(bal ? bal.currency : "CNY");
         const lines = [];
-        lines.push("Token 余额：" + sym + fmtBalance(total));
+        if (bal && bal.mode === "quota") lines.push("配额剩余：" + fmtBalance(total));
+        else lines.push("Token 余额：" + sym + fmtBalance(total));
+        if (bal && bal.note) lines.push(bal.note);
         if (view && typeof view.threshold === "number") lines.push("警戒值：" + sym + fmtBalance(view.threshold));
         if (low) lines.push("⚠ 余额不足");
         if (bal && bal.error) lines.push(bal.error);
@@ -246,6 +249,7 @@ window.__ModuleLoader__.load({
       const [view, setView] = React.useState(null);
       const [picked, setPicked] = React.useState(null);
       const [thresholdDraft, setThresholdDraft] = React.useState("");
+      const [cookieDraft, setCookieDraft] = React.useState("");
       const [msg, setMsg] = React.useState("");
       const [msgKind, setMsgKind] = React.useState("ok");
 
@@ -272,6 +276,14 @@ window.__ModuleLoader__.load({
         if (!Number.isFinite(n) || n < 0) { showMsg("警戒值需为非负数字", "err"); return; }
         api("/update", { threshold: n })
           .then((v) => { setView(v); showMsg("警戒值已保存"); })
+          .catch(() => showMsg("保存失败", "err"));
+      };
+
+      const saveCookie = () => {
+        const target = picked || (view && view.current ? { provider: view.current.provider, model: view.current.model } : null);
+        if (!target) { showMsg("请先选择模型", "err"); return; }
+        api("/update", { provider: target.provider, cookie: cookieDraft })
+          .then((v) => { setView(v); setCookieDraft(""); showMsg("Cookie 已保存并刷新余额"); })
           .catch(() => showMsg("保存失败", "err"));
       };
 
@@ -311,7 +323,7 @@ window.__ModuleLoader__.load({
 
       const balanceArea = unsupported
         ? React.createElement("div", { className: "tq-hero-unsupported" }, "该模型尚不支持")
-        : React.createElement("div", { className: "tq-hero-value" + (low ? " tq-hero-low-value" : "") }, symbol + " " + fmtBalance(total));
+        : React.createElement("div", { className: "tq-hero-value" + (low ? " tq-hero-low-value" : "") }, (bal && bal.mode === "quota" ? "" : symbol + " ") + fmtBalance(total));
 
       return React.createElement("div", { className: "tq-page" },
         React.createElement("div", { className: "tq-hero" + (low || unsupported ? " tq-hero-low" : "") },
@@ -334,7 +346,7 @@ window.__ModuleLoader__.load({
           ),
           React.createElement("div", { className: "tq-hero-model" }, "当前查看：" + (sel ? sel.provider + " / " + sel.model : "—")),
           React.createElement("div", { className: "tq-hero-meta" },
-            "最近更新 " + timeOf(bal ? bal.fetchedAt : null) + " · 今日已消耗 " + fmtNumber(todayTokens) + " tokens"
+            "最近更新 " + timeOf(bal ? bal.fetchedAt : null) + " · 今日已消耗 " + fmtNumber(todayTokens) + " tokens" + (bal && bal.note ? " · " + bal.note : "")
           ),
           low ? React.createElement("div", { className: "tq-hero-warn" }, "余额已低于警戒值（" + symbol + fmtBalance(view.threshold) + "），请及时充值") : null,
           bal && bal.error ? React.createElement("div", { className: "tq-hero-err" }, bal.error) : null,
@@ -345,6 +357,15 @@ window.__ModuleLoader__.load({
               : null
           )
         ),
+        view && view.needsCookie ? React.createElement("div", { className: "tq-section" },
+          React.createElement("div", { className: "tq-title" }, "MiMo Cookie（余额查询必需）"),
+          React.createElement("input", { className: "tq-input tq-wide", type: "password", value: cookieDraft, onChange: (e) => setCookieDraft(e.target.value), placeholder: view.hasCookie ? "已配置（重新粘贴可更新）" : "粘贴 Cookie…" }),
+          React.createElement("div", { className: "tq-row" },
+            React.createElement("button", { type: "button", className: "tq-btn tq-btn-primary", onClick: saveCookie }, "保存"),
+            React.createElement("span", { className: "tq-key-status" }, view.hasCookie ? "已配置 Cookie" : "未配置")
+          ),
+          React.createElement("div", { className: "tq-hint" }, "MiMo 余额接口需浏览器 Cookie（约 1 天有效）。请登录 platform.xiaomimimo.com/#/console/balance，用浏览器开发者工具复制请求中的 Cookie 头粘贴至此。")
+        ) : null,
         React.createElement("div", { className: "tq-section" },
           React.createElement("div", { className: "tq-title" }, "余额警戒值"),
           React.createElement("div", { className: "tq-row" },
@@ -369,6 +390,29 @@ window.__ModuleLoader__.load({
       );
     }
 
+    /** Collapsible plugin card (matches the 终端/bash card style) wrapping the Token余额 page. */
+    function TokenQuotaCard() {
+      const [open, setOpen] = React.useState(false);
+      return React.createElement("li", { className: "tq-plugin-card" + (open ? " tq-plugin-card-open" : "") },
+        React.createElement("button", {
+          type: "button",
+          className: "tq-plugin-card-header",
+          "aria-expanded": open,
+          "aria-label": (open ? "折叠" : "展开") + ": Token余额",
+          onClick: () => setOpen(!open),
+        },
+          React.createElement("span", { className: "tq-plugin-card-headtext" },
+            React.createElement("span", { className: "tq-plugin-card-name" }, "Token余额"),
+            React.createElement("span", { className: "tq-plugin-card-desc" }, "Token 余额、额度与消耗统计配置")
+          ),
+          React.createElement(IconChevronDownOutline14, { className: "tq-plugin-card-chevron" + (open ? " tq-plugin-card-chevron-open" : "") })
+        ),
+        open ? React.createElement("div", { className: "tq-plugin-card-body" },
+          React.createElement(TokenQuotaPage, null)
+        ) : null
+      );
+    }
+
     function apply(ctx) {
       activeCtx = ctx;
       injectCss();
@@ -376,9 +420,10 @@ window.__ModuleLoader__.load({
         { name: "conversation.input.right", id: "token-quota-capsule", order: 10, label: "Token余额" },
         (props) => React.createElement(TokenCapsule, { sessionId: props.sessionId })
       ));
-      ctx.slots.inject("settings.section", () => ctx.slots.register(
-        { name: "settings.section", id: "token-quota", order: 25, label: "Token余额" },
-        () => React.createElement(TokenQuotaPage, null)
+      // Token余额 设置页放在「设置 → 插件 → 插件配置」的可折叠插件卡片中（不再是独立设置目录项）。
+      ctx.slots.inject("settings.plugin.item", () => ctx.slots.register(
+        { name: "settings.plugin.item", id: "dsh-token-visual", order: 30, label: "Token余额" },
+        () => React.createElement(TokenQuotaCard, null)
       ));
     }
 

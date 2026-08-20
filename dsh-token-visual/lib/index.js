@@ -102,15 +102,19 @@ export function apply(ctx) {
 
   const state = {
     threshold: 10,
+    tokenThreshold: 80,
+    alertEnabled: true,
     daily: {},
     dailyModels: {},
     balances: {},
     cookies: {},
+    tokenPlans: {},
   };
 
   let statePath = null;
   let persistTimer = null;
   const fetchInFlight = {};
+  const tokenPlanInFlight = {};
   let providersCache = null;
   let directoryCache = null;
 
@@ -173,6 +177,8 @@ export function apply(ctx) {
       const parsed = JSON.parse(text);
       if (parsed && typeof parsed === 'object') {
         if (typeof parsed.threshold === 'number' && parsed.threshold >= 0) state.threshold = parsed.threshold;
+        if (typeof parsed.tokenThreshold === 'number' && parsed.tokenThreshold >= 0) state.tokenThreshold = parsed.tokenThreshold;
+        if (typeof parsed.alertEnabled === 'boolean') state.alertEnabled = parsed.alertEnabled;
         if (parsed.balances && typeof parsed.balances === 'object') {
           state.balances = {};
           for (const k of Object.keys(parsed.balances)) {
@@ -183,6 +189,18 @@ export function apply(ctx) {
           state.cookies = {};
           for (const k of Object.keys(parsed.cookies)) {
             if (typeof parsed.cookies[k] === 'string') state.cookies[k] = parsed.cookies[k];
+          }
+        }
+        if (parsed.tokenPlans && typeof parsed.tokenPlans === 'object') {
+          state.tokenPlans = {};
+          for (const k of Object.keys(parsed.tokenPlans)) {
+            if (parsed.tokenPlans[k] && typeof parsed.tokenPlans[k] === 'object') {
+              const entry = { ...parsed.tokenPlans[k] };
+              // 持久化的 error 是历史快照，启动后立即会被刷新覆盖；
+              // 直接丢弃，避免旧超时提示一直挂在界面上。
+              delete entry.error;
+              state.tokenPlans[k] = entry;
+            }
           }
         }
         if (parsed.daily && typeof parsed.daily === 'object') {
@@ -225,7 +243,7 @@ export function apply(ctx) {
         argv: ['powershell.exe', '-NoProfile', '-NonInteractive', '-Command', script],
         cwd: workRoot,
         stdio: { stdin: 'ignore', stdout: { maxBytes: 262144 }, stderr: { maxBytes: 32768 } },
-        graceMs: 15000,
+        graceMs: 30000,
         env: env || undefined,
       });
     } catch (e) {
@@ -242,15 +260,38 @@ export function apply(ctx) {
 
   /** One GET request returning parsed JSON; opts.auth = 'raw'|'cookie' overrides the header. */
   async function httpGetJson(url, key, opts) {
+    // Cookie auth needs WebSession to avoid PowerShell mangling the Cookie header.
+    if (opts && opts.auth === 'cookie') {
+      const script = [
+        "$ErrorActionPreference='Stop'",
+        '[Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)',
+        '$s = New-Object Microsoft.PowerShell.Commands.WebRequestSession',
+        '$env:DQ_KEY -split ";" | ForEach-Object {',
+        '  $p = $_.Trim().Split("=", 2)',
+        '  if ($p.Length -eq 2) { $s.Cookies.Add((New-Object System.Net.Cookie($p[0].Trim(), $p[1].Trim(), "/", ".xiaomimimo.com"))) }',
+        '}',
+        'try {',
+        '$r = Invoke-WebRequest -Uri $env:DQ_URL -WebSession $s -UseBasicParsing -TimeoutSec 25',
+        '$r.Content',
+        '}',
+        'catch {',
+        "Write-Output ('ERR: ' + $_.Exception.Message)",
+        'exit 1',
+        '}',
+      ].join('\n');
+      const out = await runPowershell(script, { DQ_KEY: key, DQ_URL: url });
+      const text = String(out).trim();
+      if (!text) throw new Error('空响应');
+      return JSON.parse(text);
+    }
     let authLine = '$h=@{ Authorization = "Bearer $env:DQ_KEY" }';
     if (opts && opts.auth === 'raw') authLine = '$h=@{ Authorization = $env:DQ_KEY }';
-    else if (opts && opts.auth === 'cookie') authLine = '$h=@{ Cookie = $env:DQ_KEY }';
     const script = [
       "$ErrorActionPreference='Stop'",
       '[Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)',
       authLine,
       'try {',
-      '$r = Invoke-RestMethod -Uri $env:DQ_URL -Headers $h -TimeoutSec 12',
+      '$r = Invoke-RestMethod -Uri $env:DQ_URL -Headers $h -TimeoutSec 25',
       '$r | ConvertTo-Json -Compress -Depth 10',
       '}',
       'catch {',
@@ -272,7 +313,7 @@ export function apply(ctx) {
       '$h=@{ Authorization = "Bearer $env:DQ_KEY"; "Content-Type" = "application/json" }',
       '$b = $env:DQ_BODY',
       'try {',
-      '$r = Invoke-RestMethod -Uri $env:DQ_URL -Method Post -Headers $h -Body $b -TimeoutSec 12',
+      '$r = Invoke-RestMethod -Uri $env:DQ_URL -Method Post -Headers $h -Body $b -TimeoutSec 25',
       '$r | ConvertTo-Json -Compress -Depth 10',
       '}',
       'catch {',
@@ -503,6 +544,117 @@ export function apply(ctx) {
     return { total, currency: 'CNY', isAvailable: true, note: 'MiMo 账户余额（Cookie 会话）' };
   }
 
+  /** MiMo Token Plan detail + usage via cookie auth（detail/usage 独立获取，任一失败不阻塞另一项）。 */
+  async function fetchMimoTokenPlan(provider) {
+    const cookie = state.cookies[provider];
+    if (!cookie || !cookie.trim()) return null;
+    const result = { detail: null, usage: null };
+    const failures = [];
+    try {
+      const detail = await httpGetJson('https://platform.xiaomimimo.com/api/v1/tokenPlan/detail', cookie.trim(), { auth: 'cookie' });
+      result.detail = detail && detail.data ? detail.data : detail;
+    } catch (e) {
+      failures.push('detail: ' + (e instanceof Error ? e.message : String(e)));
+    }
+    try {
+      const usage = await httpGetJson('https://platform.xiaomimimo.com/api/v1/tokenPlan/usage', cookie.trim(), { auth: 'cookie' });
+      result.usage = usage && usage.data ? usage.data : usage;
+    } catch (e) {
+      failures.push('usage: ' + (e instanceof Error ? e.message : String(e)));
+    }
+    if (failures.length > 0) result.error = failures.join('; ');
+    return result;
+  }
+
+  /** 刷新并缓存某厂商的 Token Plan（带并发防重）。 */
+  async function refreshTokenPlan(provider, cap) {
+    if (!provider) return null;
+    if (tokenPlanInFlight[provider]) return state.tokenPlans[provider] || null;
+    tokenPlanInFlight[provider] = true;
+    try {
+      let tp = null;
+      const kind = cap ? cap.kind : null;
+      if (kind === 'mimo') {
+        tp = await fetchMimoTokenPlan(provider);
+      } else if (kind === 'minimax') {
+        tp = await fetchMinimaxTokenPlan(cap);
+      } else if (kind === 'zhipu') {
+        tp = await fetchZhipuTokenPlan(cap);
+      } else if (cap && cap.supported) {
+        tp = await fetchGenericTokenPlan(cap, kind, provider);
+      }
+      if (tp === null) return state.tokenPlans[provider] || null;
+      const prev = state.tokenPlans[provider] || {};
+      // 合并：本次失败的子项（detail/usage 为 null）保留旧缓存，避免
+      // 偶发超时把已拿到的套餐信息清掉；本次完全成功则清除旧 error。
+      const merged = { ...prev, ...tp };
+      if (tp.detail === null || tp.detail === undefined) {
+        if (prev.detail !== undefined && prev.detail !== null) merged.detail = prev.detail;
+        else delete merged.detail;
+      }
+      if (tp.usage === null || tp.usage === undefined) {
+        if (prev.usage !== undefined && prev.usage !== null) merged.usage = prev.usage;
+        else delete merged.usage;
+      }
+      if (!tp.error) delete merged.error;
+      else merged.error = tp.error;
+      state.tokenPlans[provider] = merged;
+      schedulePersist();
+      return state.tokenPlans[provider];
+    } finally {
+      tokenPlanInFlight[provider] = false;
+    }
+  }
+
+  /** MiniMax Token Plan: /v1/token_plan/remains */
+  async function fetchMinimaxTokenPlan(cap) {
+    try {
+      const parsed = await httpGetJson(cap.baseURL + '/v1/token_plan/remains', cap.key);
+      const d = parsed && parsed.data ? parsed.data : parsed;
+      if (!d) return null;
+      const remain = Number(d.remain) || 0;
+      const total = Number(d.total) || 0;
+      return {
+        detail: { planName: 'Token Plan', remain, total, currency: 'CNY' },
+        usage: total > 0 ? { percent: Math.round((1 - remain / total) * 10000) / 100 } : null,
+      };
+    } catch (e) {
+      return { detail: null, usage: null, error: e instanceof Error ? e.message : String(e) };
+    }
+  }
+
+  /** 智谱 Token Plan: quota API */
+  async function fetchZhipuTokenPlan(cap) {
+    try {
+      const parsed = await httpGetJson(cap.baseURL + '/api/monitor/usage/quota/limit', cap.key, { auth: 'raw' });
+      if (!parsed || parsed.code !== 200 || !parsed.data) return null;
+      const limits = Array.isArray(parsed.data.limits) ? parsed.data.limits : [];
+      if (limits.length === 0) return null;
+      let total = 0, used = 0;
+      for (const l of limits) {
+        total += Number(l.number) || 0;
+        used += (Number(l.number) || 0) - (Number(l.remaining) || 0);
+      }
+      return {
+        detail: { planName: '智谱配额', remain: total - used, total, currency: '' },
+        usage: total > 0 ? { percent: Math.round(used / total * 10000) / 100 } : null,
+      };
+    } catch (e) {
+      return { detail: null, usage: null, error: e instanceof Error ? e.message : String(e) };
+    }
+  }
+
+  /** 通用: 从余额信息生成简易套餐展示 */
+  async function fetchGenericTokenPlan(cap, kind, provider) {
+    const b = state.balances[provider] || null;
+    if (!b || typeof b.total !== 'number') return null;
+    const names = { deepseek: 'DeepSeek', moonshot: 'Kimi/Moonshot', stepfun: '阶跃星辰', siliconflow: '硅基流动' };
+    return {
+      detail: { planName: names[kind] || kind, remain: b.total, total: b.total, currency: b.currency || 'CNY' },
+      usage: null,
+    };
+  }
+
   async function fetchSiliconflowBalance(cap) {
     const parsed = await httpGetJson(cap.baseURL + '/v1/user/info', cap.key);
     const d = parsed && parsed.data ? parsed.data : parsed;
@@ -632,7 +784,21 @@ export function apply(ctx) {
         else if (cap.kind === 'xai') result = await fetchXaiBalance(cap);
         else if (cap.kind === 'siliconflow') result = await fetchSiliconflowBalance(cap);
         else if (cap.kind === 'openai') result = await fetchOpenaiBalance(cap);
-        else if (cap.kind === 'mimo') result = await fetchMimoBalance(provider);
+        else if (cap.kind === 'mimo') {
+          result = await fetchMimoBalance(provider);
+          await refreshTokenPlan(provider, cap);
+        }
+        else if (cap.kind === 'minimax') {
+          result = await fetchMinimaxBalance(cap);
+          await refreshTokenPlan(provider, cap);
+        }
+        else if (cap.kind === 'zhipu') {
+          result = await fetchZhipuBalance(cap);
+          await refreshTokenPlan(provider, cap);
+        }
+        else if (cap.kind === 'deepseek' || cap.kind === 'moonshot' || cap.kind === 'stepfun' || cap.kind === 'siliconflow') {
+          await refreshTokenPlan(provider, cap);
+        }
         else if (cap.kind === 'qwen') result = await fetchQwenBalance(cap);
         else result = await fetchGenericBalance(cap);
       } catch (e) {
@@ -748,6 +914,7 @@ export function apply(ctx) {
     const providers = await providersView();
     const cap = provider ? await providerCapability(provider) : null;
     const needsCookie = cap ? cap.kind === 'mimo' : false;
+    const tp = provider ? (state.tokenPlans[provider] || null) : null;
     return {
       current: target ? { provider: target.provider, model: target.model } : null,
       balance: b ? {
@@ -760,7 +927,10 @@ export function apply(ctx) {
         error: b.error || null,
         note: b.note || null,
       } : null,
+      tokenPlan: tp,
       threshold: state.threshold,
+      tokenThreshold: state.tokenThreshold,
+      alertEnabled: state.alertEnabled !== false,
       daily: state.daily,
       dailyModels: state.dailyModels,
       providers,
@@ -802,7 +972,11 @@ export function apply(ctx) {
           target = { provider: args.provider, model: args.model };
         }
         const sel = target || currentSelection();
-        if (sel && sel.provider) await maybeRefresh(sel.provider);
+        if (sel && sel.provider) {
+          await maybeRefresh(sel.provider);
+          const cap = await providerCapability(sel.provider);
+          await refreshTokenPlan(sel.provider, cap);
+        }
         res.writeHead(200, { 'content-type': 'application/json' });
         res.end(JSON.stringify(await stateView(sel)));
         return;
@@ -825,6 +999,12 @@ export function apply(ctx) {
         const patch = await readJson(req);
         if (typeof patch.threshold === 'number' && Number.isFinite(patch.threshold) && patch.threshold >= 0) {
           state.threshold = patch.threshold;
+        }
+        if (typeof patch.tokenThreshold === 'number' && Number.isFinite(patch.tokenThreshold) && patch.tokenThreshold >= 0) {
+          state.tokenThreshold = patch.tokenThreshold;
+        }
+        if (typeof patch.alertEnabled === 'boolean') {
+          state.alertEnabled = patch.alertEnabled;
         }
         if (typeof patch.provider === 'string' && patch.provider && typeof patch.cookie === 'string') {
           state.cookies[patch.provider] = patch.cookie.trim();
